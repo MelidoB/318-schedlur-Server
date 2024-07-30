@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Configure CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow only your frontend
+  origin: 'https://318-schedlur-client.vercel.app/', // Allow only your frontend
 }));
 
 // Define Routes
