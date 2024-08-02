@@ -14,9 +14,13 @@ connectDB();
 app.use(express.json());
 
 // Configure CORS
-app.use(cors({
-  origin: 'https://318-schedlur-client.vercel.app/', // Allow only your frontend
-}));
+const corsOptions = {
+  origin: 'https://318-schedlur-client.vercel.app', // Allow only your frontend
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handle preflight requests for all routes
 
 // Define Routes
 app.use('/api/auth', require('./routes/auth'));
