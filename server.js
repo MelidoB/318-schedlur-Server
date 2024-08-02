@@ -26,7 +26,20 @@ app.options('*', cors(corsOptions)); // Handle preflight requests for all routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./event/eventRoutes'));
 app.use('/api/routines', require('./routine/routineRoutes'));
-app.use('/api/settings', require('./settings/settingsRoutes')); // Add this line for settings
+app.use('/api/settings', require('./settings/settingsRoutes'));
+
+// Handle root route
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
+// Handle favicon.ico
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+// Handle non-existent routes
+app.use((req, res, next) => {
+  res.status(404).send('Route not found');
+});
 
 const PORT = process.env.PORT || 5001;
 
